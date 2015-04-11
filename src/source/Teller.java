@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Teller {
 
     // arraylist of customers
-
     private static ArrayList<Customer> customerList = new ArrayList<>();
     private static Scanner keyboard;
     private static Customer tempCust;
@@ -63,8 +62,10 @@ public class Teller {
         System.out.println("Address:");
         keyboard.nextLine();
         String address = keyboard.nextLine();
-        System.out.println("PIN:");
-        int PIN = keyboard.nextInt();
+        System.out.println("SIN:");
+        String sin = keyboard.next();
+
+        tempCust = new Customer(firstName, lastName, sin, address, tempCustType);
         System.out.println("What account would you like to make?");
         int index = 1;
         if (tempCustType != CustomerType.STUDENT) {
@@ -78,14 +79,14 @@ public class Teller {
         System.out.print(index + ". Credit ");
         index++;
         if (tempCustType == CustomerType.BUSINESS) {
-            System.out.println(index + ". Business");
+            System.out.print(index + ". Business");
             index++;
         }
-
+        System.out.println("");
         int accChosen = keyboard.nextInt();
         if (tempCustType == CustomerType.REGULAR) {
             if (accChosen == 1) {
-                
+
                 tempAcctType = AccountType.CHEQUING;
             } else if (accChosen == 2) {
 
@@ -105,7 +106,7 @@ public class Teller {
         } else if (tempCustType == CustomerType.SENIOR) {
             if (accChosen == 1) {
                 tempAcctType = AccountType.CHEQUING;
-                
+
             } else if (accChosen == 2) {
 
                 tempAcctType = AccountType.SAVINGS;
@@ -125,30 +126,31 @@ public class Teller {
                 tempAcctType = AccountType.BUSINESS;
             }
         }
-        switch (custType) {
-            case 1:
-                // regular customer
-                System.out.println("Regular Customer");
+        //create the acount
+        switch (tempAcctType) {
+            case CHEQUING:
+                // chequing account
+                System.out.println("Chequing Created");
                 /*
                  * RegularCust regCust = new RegularCust(firstName, lastName,
                  * address, PIN); customerList.add(regCust);
                  */
 
                 break;
-            case 2:
+            case SAVINGS:
                 // student customer
-                System.out.println("Student Customer");
-                /*
+                 System.out.println("Savings Created");
+               /*
                  * System.out.println("Student Number?"); int stuNum =
                  * keyboard.nextInt(); StudentCust studCust = new
                  * StudentCust(firstName, lastName, address, PIN, stuNum);
                  * customerList.add(studCust);
                  */
                 break;
-            case 3:
+            case CREDIT:
                 // Senior Customer
-                System.out.println("Senior Customer");
-			// Customer seniorCust = new Customer(custType.SENIOR, firstName,
+                System.out.println("Credit Created");
+                // Customer seniorCust = new Customer(custType.SENIOR, firstName,
                 // lastName, address, PIN);
 
                 /*
@@ -156,10 +158,10 @@ public class Teller {
                  * PIN); customerList.add(senCust);
                  */
                 break;
-            case 4:
+            case BUSINESS:
                 // Business Customer
-                System.out.println("Business Customer");
-                /*
+               System.out.println("Business Created");
+                 /*
                  * System.out.println("Stocks Available?"); int stockAvail =
                  * keyboard.nextInt(); BusinessCust busCust = new
                  * BusinessCust(firstName, lastName, address, PIN, stockAvail);
@@ -170,6 +172,8 @@ public class Teller {
             default:
                 System.out.println("An error has occured");
         }
+        
+            mainMenu();
     }
 
     private void lookupCustomer() {
@@ -210,7 +214,7 @@ public class Teller {
     private void editCustomer(Customer cust) {
 
         System.out.println("-Edit Customer------");
-		// cust.displayCustomerInfo();
+        // cust.displayCustomerInfo();
         // cust.displayAccountInfo();
         System.out.println("Input a command");
         System.out.println("0. Back to main");
@@ -223,7 +227,7 @@ public class Teller {
         while (Integer.parseInt(input) != 0) {
             switch (Integer.parseInt(input)) {
                 case 1:
-				// Display account info
+                    // Display account info
                     // cust.displayAccountInfo();
                     break;
                 case 2:
@@ -250,7 +254,7 @@ public class Teller {
     }
 
     private void chooseAccount(Customer cust, String action) {
-		// Display account info
+        // Display account info
         // cust.displayAccountInfo();
 
         if (action.equals("d")) {
@@ -264,7 +268,7 @@ public class Teller {
     private void editInformation(Customer cust) {
 
         System.out.println("-Edit Information------");
-		// display account info
+        // display account info
         // cust.displayCustomerInfo();
         System.out.println("Input a command");
         System.out.println("0. Back to main");
@@ -278,7 +282,7 @@ public class Teller {
         while (Integer.parseInt(input) != 0) {
             switch (Integer.parseInt(input)) {
                 case 1:
-				// display account info
+                    // display account info
                     // cust.displayAccountInfo();
                     break;
                 case 2:

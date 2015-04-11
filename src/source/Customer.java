@@ -21,7 +21,7 @@ public class Customer
 	 * @param sin
 	 * @param address
 	 */
-	public Customer(String firstName, String lastName, String sin, String address, int custType)
+	public Customer(String firstName, String lastName, String sin, String address, CustomerType custType)
 	{
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -29,6 +29,7 @@ public class Customer
 		this.address = address;
 		setCustType(custType);
 		this.acctList = new ArrayList<Account>();
+                System.out.println("Customer created");
 	}
 
 	/**
@@ -86,16 +87,9 @@ public class Customer
 		this.address = address;
 	}
 	
-	private void setCustType(int type)
+	private void setCustType(CustomerType type)
 	{
-		if(type == 1)
-			this.custType = CustomerType.STUDENT;
-		else if(type == 2)
-			this.custType = CustomerType.REGULAR;
-		else if(type == 3)
-			this.custType = CustomerType.SENIOR;
-		else if(type == 4)
-			this.custType = CustomerType.BUSINESS;
+		this.custType = type;
 	}
 
 	// ACCESSORS
