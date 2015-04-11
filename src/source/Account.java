@@ -9,6 +9,7 @@ public abstract class Account
 	private double monthlyFee;
 	private int transactionCount = 0;
 	private int freeTransactionCount;
+        private int transactionFee;
 	private double interestRate;
 
 	/**
@@ -56,11 +57,12 @@ public abstract class Account
 	 * @param amount
 	 * @return true if transaction was successful, false otherwise
 	 */
+        
 	public boolean Deposit(double amount)
 	{
 		if (amount > 0.0)
 		{
-			++this.transactionCount;
+			updateTransactionCount();
 			return updateAcctBalance(amount);
 		}
 		else
@@ -78,7 +80,7 @@ public abstract class Account
 		if (acctBalance >= amount && amount <= maxWithdrawal && amount > 0)
 		{
 			amount *= -1; // Multiply by negative -1 to extract the amount of withdraw from account balance
-			++this.transactionCount;
+			updateTransactionCount();
 			return updateAcctBalance(amount);
 		}
 		else
@@ -86,7 +88,12 @@ public abstract class Account
 			return false;
 		}
 	}
-
+        private void updateTransactionCount(){
+            ++this.transactionCount;
+            if(this.transactionCount > this.freeTransactionCount){
+                this.acctBalance -=this.transactionFee;
+            }
+        }
 	/**
 	 * Updates the account balance with the specified amount
 	 * @param amount
