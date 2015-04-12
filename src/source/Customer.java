@@ -13,7 +13,7 @@ public class Customer
 	private static Account acct_temp; // Account class wrapper
 	private ArrayList<Account> acctList; // Collection for holding account records
 	private int acctCount = 0; // Variable to hold the number of accounts our customer has (could be acctList.length as well, but I think its better this way)
-
+	
 	/**
 	 * Constructor
 	 * @param firstName
@@ -30,7 +30,31 @@ public class Customer
 		setCustType(custType);
 		this.acctList = new ArrayList<Account>();
 	}
-
+	
+	public boolean transfer(Account source, Account destination, double amount)
+	{
+		if(source.getFreeTransactionCount() <= source.getTransactionCount() && source.getFreeTransactionCount() != -1)
+		{
+			source.setTransactionFeeOwed();
+			source.withdraw(amount);
+			return destination.deposit(amount);
+		}
+		else
+		{
+			source.withdraw(amount);
+			return destination.deposit(amount);
+		}	
+	}
+	
+	public void calculateAllOwed()
+	{
+		
+	}
+	
+	public void calculateAllBenefit()
+	{
+		
+	}
 	/**
 	 * Creates an account if account limit is not exceeded and adds it to account list
 	 */
