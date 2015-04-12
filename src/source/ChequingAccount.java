@@ -29,7 +29,7 @@ public class ChequingAccount extends Account
 		return this.overdraftLimit;
 	}
 	
-	//MUTATORS
+	// MUTATORS
 	public void setOverdraftLimit(double overdraftLimit)
 	{
 		this.overdraftLimit = overdraftLimit;
