@@ -17,7 +17,7 @@ public class MainTest
 		System.out.println(account.getTotalOwed());
 		*/
 		
-		Account account = new ChequingAccount(0.0, 1000, 15, 1, 1, 500);
+		Account account = new SavingsAccount(0.0, 15, 1, 1);
 		System.out.println(account);
 		account.deposit(15000);
 		System.out.println(account);
