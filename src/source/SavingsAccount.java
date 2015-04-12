@@ -14,7 +14,6 @@ public class SavingsAccount extends Account
 	@Override
 	public boolean deposit(double amount)
 	{
-		
 		if(this.getFreeTransactionCount() <= this.getTransactionCount() && this.getFreeTransactionCount() != -1)
 		{
 			this.setTransactionFeeOwed();
