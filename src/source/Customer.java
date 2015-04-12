@@ -132,11 +132,11 @@ public class Customer
 	{
 		return this.acctList;
 	}
-
+       
 	@Override
 	public String toString()
 	{
-		return String.format("Name: %20s | Surname: %20s | SIN: %20s | Address: %20s",
+		return String.format("%20s %20s %20s %20s",
 				this.getFirstName(), this.getLastName(), this.getSin(), this.getAddress());
 	}
 }
