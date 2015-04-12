@@ -17,12 +17,22 @@ public class MainTest
 		System.out.println(account.getTotalOwed());
 		*/
 		
-		Account account = new ChequingAccount(0.0, 1000, 15, 0, 500);
+		Account account = new ChequingAccount(0.0, 1000, 15, 1, 1, 500);
 		System.out.println(account);
 		account.deposit(15000);
 		System.out.println(account);
 		account.withdraw(1000);
 		System.out.println(account);
+		account.deposit(1000);
+		System.out.println(account);
+		account.deposit(1000);
+		System.out.println(account);
+		account.withdraw(1000);
+		System.out.println(account);
+		System.out.println(account.getFreeTransactionCount());
+		System.out.println(account.getTransactionCount());
+		System.out.println(account.getTransactionFee());
+		
 		
 	}
 }

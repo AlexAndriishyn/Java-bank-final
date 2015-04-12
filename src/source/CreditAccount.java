@@ -9,9 +9,9 @@ public class CreditAccount extends Account
 	private double creditOwing; // Total of what is owed
 	private double minCreditPayment;
 	
-	public CreditAccount(double acctBalance, double maxWithdrawal, double monthlyFee, int freeTransactionCount, double interestRate)
+	public CreditAccount(double acctBalance, double maxWithdrawal, double monthlyFee, int freeTransactionCount, double transactionFee, double interestRate)
 	{
-		super(ACCT_TYPE, acctBalance, maxWithdrawal, monthlyFee, freeTransactionCount, interestRate);
+		super(ACCT_TYPE, acctBalance, maxWithdrawal, monthlyFee, freeTransactionCount, transactionFee, interestRate);
 		this.creditAmount = this.getAcctBalance();
 		this.creditOwing = 0.0;
 		this.minCreditPayment = 0.0;

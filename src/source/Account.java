@@ -9,7 +9,8 @@ public abstract class Account
 	private double monthlyFee;
 	private int transactionCount = 0;
 	private int freeTransactionCount;
-	private int transactionFee;
+	private double transactionFee;
+	private double transactionFeeOwed;
 	private double interestRate;
 	private double totalOwed;
 	private double totalGained;
@@ -20,9 +21,10 @@ public abstract class Account
 	 * @param acctBalance
 	 * @param maxWithdrawal
 	 * @param monthlyFee
+	 * @param freeTransactionCount
 	 * @param interestRate 
 	 */
-	public Account(int ACCT_TYPE, double acctBalance, double maxWithdrawal, double monthlyFee, int freeTransactionCount, double interestRate)
+	public Account(int ACCT_TYPE, double acctBalance, double maxWithdrawal, double monthlyFee, int freeTransactionCount, double transactionFee, double interestRate)
 	{
 		this.setAcctNumber(); // Assigning account number
 		this.setAcctType(ACCT_TYPE); // Assigning account type
@@ -31,6 +33,8 @@ public abstract class Account
 		this.monthlyFee = monthlyFee;
 		this.freeTransactionCount = freeTransactionCount;
 		this.interestRate = interestRate;
+		this.transactionFee = transactionFee;
+		this.transactionFeeOwed = 0.0;
 		this.totalGained = 0.0;
 		this.totalOwed = 0.0;
 	}
@@ -129,6 +133,16 @@ public abstract class Account
 		this.freeTransactionCount = freeTransactionCount;
 	}
 	
+	public void setTransactionFee(double transactionFee)
+	{
+		this.transactionFee = transactionFee;
+	}
+	
+	public void setTransactionFeeOwed()
+	{
+		this.transactionFeeOwed += this.transactionFee;
+	}
+	
 	public void setInterestRate(double interestRate)
 	{
 		this.interestRate = interestRate;
@@ -172,7 +186,7 @@ public abstract class Account
 		return this.monthlyFee;
 	}
 
-	public int getAcctTransactionCount()
+	public int getTransactionCount()
 	{
 		return this.transactionCount;
 	}
@@ -180,6 +194,16 @@ public abstract class Account
 	public int getFreeTransactionCount()
 	{
 		return this.freeTransactionCount;
+	}
+	
+	public double getTransactionFee()
+	{
+		return this.transactionFee;
+	}
+	
+	public double getTransactionFeeOwed()
+	{
+		return this.transactionFeeOwed;
 	}
 	
 	public double getInterestRate()
@@ -196,6 +220,6 @@ public abstract class Account
 	public String toString()
 	{
 		return String.format("Account# %3d | Type: %8s | Balance: %9.2f | Max. withdrawal: %7.2f |Transactions: %3d |",
-				this.getAcctNumber(), this.getAcctTypeDesc(), this.getAcctBalance(), this.getMaxWithdrawal(), this.getAcctTransactionCount());
+				this.getAcctNumber(), this.getAcctTypeDesc(), this.getAcctBalance(), this.getMaxWithdrawal(), this.getTransactionCount());
 	}
 }
