@@ -66,25 +66,31 @@ public class Teller {
         String sin = keyboard.next();
 
         tempCust = new Customer(firstName, lastName, sin, address, tempCustType);
+        customerList.add(tempCust);
+        addAccount(tempCustType);
+        mainMenu();
+    }
+
+    private void addAccount(CustomerType custType) {
         System.out.println("What account would you like to make?");
         int index = 1;
-        if (tempCustType != CustomerType.STUDENT) {
+        if (custType != CustomerType.STUDENT) {
             System.out.print(index + ". Chequing ");
             index++;
         }
-        if (tempCustType != CustomerType.BUSINESS) {
+        if (custType != CustomerType.BUSINESS) {
             System.out.print(index + ". Savings ");
             index++;
         }
         System.out.print(index + ". Credit ");
         index++;
-        if (tempCustType == CustomerType.BUSINESS) {
+        if (custType == CustomerType.BUSINESS) {
             System.out.print(index + ". Business");
             index++;
         }
         System.out.println("");
         int accChosen = keyboard.nextInt();
-        if (tempCustType == CustomerType.REGULAR) {
+        if (custType == CustomerType.REGULAR) {
             if (accChosen == 1) {
 
                 tempAcctType = AccountType.CHEQUING;
@@ -103,7 +109,7 @@ public class Teller {
 
                 tempAcctType = AccountType.CREDIT;
             }
-        } else if (tempCustType == CustomerType.SENIOR) {
+        } else if (custType == CustomerType.SENIOR) {
             if (accChosen == 1) {
                 tempAcctType = AccountType.CHEQUING;
 
@@ -114,7 +120,7 @@ public class Teller {
 
                 tempAcctType = AccountType.CREDIT;
             }
-        } else if (tempCustType == CustomerType.BUSINESS) {
+        } else if (custType == CustomerType.BUSINESS) {
             if (accChosen == 1) {
 
                 tempAcctType = AccountType.CHEQUING;
@@ -139,8 +145,8 @@ public class Teller {
                 break;
             case SAVINGS:
                 // student customer
-                 System.out.println("Savings Created");
-               /*
+                System.out.println("Savings Created");
+                /*
                  * System.out.println("Student Number?"); int stuNum =
                  * keyboard.nextInt(); StudentCust studCust = new
                  * StudentCust(firstName, lastName, address, PIN, stuNum);
@@ -160,8 +166,8 @@ public class Teller {
                 break;
             case BUSINESS:
                 // Business Customer
-               System.out.println("Business Created");
-                 /*
+                System.out.println("Business Created");
+                /*
                  * System.out.println("Stocks Available?"); int stockAvail =
                  * keyboard.nextInt(); BusinessCust busCust = new
                  * BusinessCust(firstName, lastName, address, PIN, stockAvail);
@@ -172,48 +178,55 @@ public class Teller {
             default:
                 System.out.println("An error has occured");
         }
-        
-            mainMenu();
     }
 
     private void lookupCustomer() {
 
-        System.out.println("-Search Customer------");
+        System.out.println("-Listing Customers------");
+        if (customerList.isEmpty()) {
+            System.out.println("There are no customers in your application.");
+        }else{
         displayCustomerList();
         Customer foundCust = getManageCustomer();
         if (foundCust != null) {
-            editCustomer(foundCust);
+            manageCustomer(foundCust);
         } else {
             System.out.println("No matching customer found");
+        }
         }
         mainMenu();
     }
 
     private void displayCustomerList() {
-        System.out.println("Record" + "\t\t" + "First" + "\t\t\t" + "Last");
-        /*
-         * for (Customer tempCust : customerList) {
-         * 
-         * System.out.println(tempCust.getAccessCard() + "\t\t\t" +
-         * tempCust.getFirstName() + "\t\t\t" + tempCust.getLastName()); }
-         */
+
+        int i = 1;
+
+        String head = String.format("%s %20s %20s %20s %20s",
+                "ID", "First Name", "Last Name", "SIN", "Address");
+        System.out.println(head);
+
+        for (Customer tempCust : customerList) {
+            System.out.println(i + " " + tempCust.toString());
+            i++;
+        }
 
     }
 
     private Customer getManageCustomer() {
-        System.out.println("Please enter the customer's access card number");
-        int access = keyboard.nextInt();
-        /*
-         * for (Customer tempCust : customerList) {
-         * 
-         * if (access == tempCust.getAccessCard()) { return tempCust; } }
-         */
-        return null;
+        try{
+        System.out.println("Please enter the customer's ID");
+        int id = keyboard.nextInt();
+        return customerList.get(id-1);
+        }catch(IndexOutOfBoundsException e){
+            return null;
+        }
+        
+       
     }
 
-    private void editCustomer(Customer cust) {
+    private void manageCustomer(Customer cust) {
 
-        System.out.println("-Edit Customer------");
+        System.out.println("-Edit "+cust.getFirstName()+" "+cust.getLastName()+"------");
         // cust.displayCustomerInfo();
         // cust.displayAccountInfo();
         System.out.println("Input a command");
@@ -227,14 +240,14 @@ public class Teller {
         while (Integer.parseInt(input) != 0) {
             switch (Integer.parseInt(input)) {
                 case 1:
-                    // Display account info
-                    // cust.displayAccountInfo();
+                    getAllAccountBalance(cust);
+                    manageCustomer(cust);
                     break;
                 case 2:
-                    chooseAccount(cust, "d");
+                    chooseAccount(cust, TransactionType.DEPOSIT);
                     break;
                 case 3:
-                    chooseAccount(cust, "w");
+                    chooseAccount(cust,  TransactionType.WITHDRAWAL);
                     break;
                 case 4:
                     // create account
@@ -244,7 +257,7 @@ public class Teller {
                     break;
                 default:
                     System.out.println("Please enter a valid command");
-                    editCustomer(cust);
+                    manageCustomer(cust);
                     break;
             }
             input = keyboard.next();
@@ -252,17 +265,26 @@ public class Teller {
 
         mainMenu();
     }
-
-    private void chooseAccount(Customer cust, String action) {
+ public void getAllAccountBalance(Customer cust){
+            String accBalance="";
+            String accType="";
+            System.out.println("Account Type    Account Balance");
+            for(Account tempAccount:cust.getAcctList()){
+                tempAcctType = AccountType.values()[tempAccount.getAcctType()];
+                accBalance += tempAcctType.toString()+": "+Double.toString(tempAccount.getAcctBalance());
+                System.out.print(accBalance);
+            }
+        }
+    private void chooseAccount(Customer cust, TransactionType transType) {
         // Display account info
         // cust.displayAccountInfo();
-
-        if (action.equals("d")) {
-
-        } else if (action.equals("w")) {
-
+        if(transType == TransactionType.DEPOSIT){
+            
+        }else if(transType == TransactionType.WITHDRAWAL){
+            
         }
-
+       
+        manageCustomer(cust);
     }
 
     private void editInformation(Customer cust) {
@@ -282,14 +304,13 @@ public class Teller {
         while (Integer.parseInt(input) != 0) {
             switch (Integer.parseInt(input)) {
                 case 1:
-                    // display account info
-                    // cust.displayAccountInfo();
+                    //edit first name
                     break;
                 case 2:
-                    chooseAccount(cust, "d");
+                    //edit last name
                     break;
                 case 3:
-                    chooseAccount(cust, "w");
+                    //edit address
                     break;
                 case 4:
                     // create account
@@ -299,13 +320,13 @@ public class Teller {
                     break;
                 default:
                     System.out.println("Please enter a valid command");
-                    editCustomer(cust);
+                    manageCustomer(cust);
                     break;
             }
             input = keyboard.next();
         }
 
-        editCustomer(cust);
+        manageCustomer(cust);
     }
 
 }
