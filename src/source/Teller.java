@@ -304,7 +304,7 @@ public class Teller {
         while (Integer.parseInt(input) != 0) {
             switch (Integer.parseInt(input)) {
                 case 1:
-                    //edit first name
+                    //edit first names
                     break;
                 case 2:
                     //edit last name
