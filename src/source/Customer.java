@@ -13,7 +13,7 @@ public class Customer
 	private static Account acct_temp; // Account class wrapper
 	private ArrayList<Account> acctList; // Collection for holding account records
 	private int acctCount = 0; // Variable to hold the number of accounts our customer has (could be acctList.length as well, but I think its better this way)
-	
+
 	/**
 	 * Constructor
 	 * @param firstName
@@ -30,7 +30,35 @@ public class Customer
 		setCustType(custType);
 		this.acctList = new ArrayList<Account>();
 	}
-	
+
+	/**
+	 * Creates an account if account limit is not exceeded and adds it to account list
+	 */
+        public CustomerType getCustType(){
+            return this.custType;
+        }
+	public boolean createAcct(Account acct)
+	{
+		
+		if (acctCount < ACCT_LIMIT)
+		{
+		
+			this.acctList.add(acct);
+			acctCount += 1;
+			return true;	
+                	
+		}else{
+                    return false;
+                }
+    
+	}
+	/**
+	 * This method will manage the transactions between accounts
+	 * @param source
+	 * @param destination
+	 * @param amount
+	 * @return 
+	 */
 	public boolean transfer(Account source, Account destination, double amount)
 	{
 		if(source.getFreeTransactionCount() <= source.getTransactionCount() && source.getFreeTransactionCount() != -1)
@@ -54,27 +82,6 @@ public class Customer
 	public void calculateAllBenefit()
 	{
 		
-	}
-	/**
-	 * Creates an account if account limit is not exceeded and adds it to account list
-	 */
-        public CustomerType getCustType(){
-            return this.custType;
-        }
-	public boolean createAcct(Account acct)
-	{
-		
-		if (acctCount < ACCT_LIMIT)
-		{
-		
-			this.acctList.add(acct);
-			acctCount += 1;
-			return true;	
-                	
-		}else{
-                    return false;
-                }
-    
 	}
 	
 	// MUTATORS
@@ -158,5 +165,3 @@ public class Customer
 				this.getFirstName(), this.getLastName(), this.getSin(), this.getAddress());
 	}
 }
-
-
