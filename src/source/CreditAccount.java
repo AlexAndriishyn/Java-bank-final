@@ -84,6 +84,6 @@ public class CreditAccount extends Account
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format("Credit amount: %9.2f | Min credit to pay: %8.2f | Interest rate: %8f", this.creditOwing, this.minCreditPayment, this.getInterestRate());
+		return super.toString() + String.format("Credit amount: %9.2f | Min credit to pay: %8.2f | Interest rate: %8.4f", this.creditOwing, this.minCreditPayment, this.getInterestRate());
 	}
 }
