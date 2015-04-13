@@ -71,6 +71,12 @@ public class CreditAccount extends Account
 	{
 		return this.creditOwing;
 	}
+	
+	@Override
+	public double getTotalOwed()
+	{
+		return this.getCreditOwing() + this.getTransactionFeeOwed() + this.getMonthlyFee();
+	}
 	// MUTATORS
 	
 	/**

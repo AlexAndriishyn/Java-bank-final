@@ -268,13 +268,14 @@ private static Account destination;
         String accType = "";
         System.out.println("-Accounts in " + tempCust.getFirstName() + " " + tempCust.getLastName() + "----");
 
-        for (Account tempAccount : tempCust.getAcctList()) {
+        for (Account tempAccount : tempCust.getAcctList()) 
+	{
             // tempAcctType = AccountType.values()[tempAccount.getAcctType() - 1];
             // accBalance += String.format("%s %20s",
             // tempAcctType.toString(), Double.toString(tempAccount.getAcctBalance()));
-            accBalance += tempAccount + "\n";
-        }
-	System.out.println(accBalance);
+            System.out.println(tempAccount);
+	}
+	System.out.printf("Total owed: %.2f%n", tempCust.getTotalOwed());
     }
 
     private void chooseAccount(TransactionType transType) {

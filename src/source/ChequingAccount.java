@@ -46,6 +46,12 @@ public class ChequingAccount extends Account
 			return super.withdraw(amount);
 	}
 	
+	@Override
+	public double getTotalOwed()
+	{
+		return this.getTransactionFeeOwed() + this.getMonthlyFee(); 
+	}
+	
 	// ACCESSORS
 	public double getOverdraftLimit()
 	{

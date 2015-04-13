@@ -12,7 +12,8 @@ public class Customer
 	private final static int ACCT_LIMIT = 2;
 	private static Account acct_temp; // Account class wrapper
 	private ArrayList<Account> acctList; // Collection for holding account records
-	private int acctCount = 0; // Variable to hold the number of accounts our customer has (could be acctList.length as well, but I think its better this way)
+	private int acctCount = 0; // This variable to hold the number of accounts our customer has (could be acctList.length as well, but I think its better this way)
+	private double totalOwed = 0; // This variable holds the total amount of money owed on all accounts (monthly fees, transaction fees, credit interest)
 
 	/**
 	 * Constructor
@@ -60,9 +61,13 @@ public class Customer
 	 * @return 
 	 */
 	
-	public void calculateAllOwed()
+	public double getTotalOwed()
 	{
-		
+		for (Account acct : acctList)
+		{
+			totalOwed += acct.getTotalOwed();
+		}
+		return totalOwed;
 	}
 	
 	public void calculateAllBenefit()

@@ -36,6 +36,12 @@ public class SavingsAccount extends Account
 	}
 	
 	@Override
+	public double getTotalOwed()
+	{
+		return this.getTransactionFeeOwed() + this.getMonthlyFee(); 
+	}
+	
+	@Override
 	public String toString()
 	{
 		return super.toString() + String.format("| Transaction fee owed: %3.2f", this.getTransactionFeeOwed());

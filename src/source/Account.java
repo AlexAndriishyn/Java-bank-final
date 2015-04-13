@@ -211,10 +211,7 @@ public abstract class Account
 		return this.interestRate;
 	}
 	
-	public double getTotalOwed()
-	{
-		return this.totalOwed + this.monthlyFee;
-	}
+	public abstract double getTotalOwed();
 
 	@Override
 	public String toString()
