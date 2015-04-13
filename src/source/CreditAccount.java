@@ -81,7 +81,7 @@ public class CreditAccount extends Account
 	@Override
 	public double getTotalBalance()
 	{
-		return 0.0;
+		return 0.0; // here we've decided that the balance of the credit account is not something that customer has as it's own money.
 	}
 	// MUTATORS
 
@@ -96,6 +96,6 @@ public class CreditAccount extends Account
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format("Credit amount: %9.2f | Min credit to pay: %8.2f | Interest rate: %8.4f", this.creditOwing, this.minCreditPayment, this.getInterestRate());
+		return super.toString() + String.format("Credit amount: %9.2f | Min credit to pay: %8.2f | Interest rate: %8.4f", this.creditOwing, this.minCreditPayment, this.getInterestRate()/100);
 	}
 }

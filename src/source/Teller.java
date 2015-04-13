@@ -294,7 +294,14 @@ private static Account destination;
 		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
 		System.out.println("Amount of your " + transType);
 		amount = keyboard.nextDouble();
-		tempAcct.deposit(amount);
+		if(tempAcct.deposit(amount))
+		{
+			System.out.println("Transaction successful");
+		}
+		else
+		{
+			System.out.println("Not enough money/maximum withdrawal amount exceeded");
+		}
 	} 
 	else if (transType == TransactionType.WITHDRAWAL) 
 	{
@@ -303,7 +310,14 @@ private static Account destination;
 		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
 		System.out.println("Amount of your " + transType);
 		amount = keyboard.nextDouble();
-		tempAcct.withdraw(amount);
+		if(tempAcct.withdraw(amount))
+		{
+			System.out.println("Transaction successful");
+		}
+		else
+		{
+			System.out.println("Not enough money/maximum withdrawal amount exceeded");
+		}
 	} 
 	else if (transType == TransactionType.TRANSFER) 
 	{
@@ -312,14 +326,19 @@ private static Account destination;
 		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
 		System.out.println("Amount of your " + transType);
 		amount = keyboard.nextDouble();
-		tempAcct.withdraw(amount);
-		System.out.println("Choose a destination account for your " + transType);
-		acctChoose = keyboard.nextInt();
-		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
-		tempAcct.deposit(amount);
+		if(tempAcct.withdraw(amount)) // Here, we check for the success of withdrawal operation, if `ok`, we can proceed with transfer operation
+		{
+			System.out.println("Choose a destination account for your " + transType);
+			acctChoose = keyboard.nextInt();
+			tempAcct = tempCust.getAcctList().get(acctChoose - 1);
+			tempAcct.deposit(amount);
+			System.out.println("Transaction successful");
+		}
+		else
+		{
+			System.out.println("Not enough money/maximum withdrawal amount exceeded");
+		}
 	}
-
-        System.out.println("Transaction successful");
         manageCustomer();
     }
 
@@ -344,12 +363,16 @@ private static Account destination;
                     System.out.println("New first name:");
                     String firstName = keyboard.next();
                     tempCust.setFirstName(firstName);
+		System.out.println("...ok");
+		System.out.println("What else do you want to edit?");
                     break;
                 case 2:
                     //edit last name
                     System.out.println("New last name:");
                     String lastName = keyboard.next();
                     tempCust.setLastName(lastName);
+		System.out.println("...ok");
+		System.out.println("What else do you want to edit?");
                     break;
                 case 3:
                     //edit address
@@ -357,24 +380,23 @@ private static Account destination;
                     keyboard.nextLine();
                     String address = keyboard.nextLine();
                     tempCust.setAddress(address);
+		System.out.println("...ok");
+		System.out.println("What else do you want to edit?");
                     break;
                 case 4:
                     // edit SIN
                     System.out.println("New SIN:");
                     String sin = keyboard.next();
                     tempCust.setSin(sin);
+		System.out.println("...ok");
+		System.out.println("What else do you want to edit?");
                     break;
                 default:
                     System.out.println("Please enter a valid command");
-
                     break;
             }
-
             input = keyboard.next();
         }
-
         manageCustomer();
-
     }
-
 }

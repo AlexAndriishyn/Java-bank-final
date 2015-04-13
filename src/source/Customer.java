@@ -64,6 +64,7 @@ public class Customer
 	
 	public double getTotalOwed()
 	{
+		totalOwed = 0.0;
 		for (Account acct : acctList)
 		{
 			totalOwed += acct.getTotalOwed();
@@ -73,6 +74,7 @@ public class Customer
 	
 	public double getTotalBalance()
 	{
+		totalBalance = 0.0;
 		for (Account acct : acctList)
 		{
 			totalBalance += acct.getTotalBalance();
