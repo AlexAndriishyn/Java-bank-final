@@ -226,8 +226,9 @@ private static Account destination;
         System.out.println("1. View balance");
         System.out.println("2. Deposit into an account");
         System.out.println("3. Withdraw from an account");
-        System.out.println("4. Add new account");
-        System.out.println("5. Edit customer information");
+	System.out.println("4. Transfer money");
+        System.out.println("5. Add new account");
+        System.out.println("6. Edit customer information");
         String input = keyboard.next();
         while (Integer.parseInt(input) != 0) {
             switch (Integer.parseInt(input)) {
@@ -242,7 +243,7 @@ private static Account destination;
                     chooseAccount(TransactionType.WITHDRAWAL);
                     break;
 		case 4:
-			System.out.println("");
+			chooseAccount(TransactionType.TRANSFER);
 			break;
                 case 5:
                     System.out.println(tempCust.getCustType());
@@ -278,21 +279,43 @@ private static Account destination;
 
     private void chooseAccount(TransactionType transType) {
 
+	int acctChoose = -1;
+	double amount = 0.0;
         // Display account info
         // cust.displayAccountInfo();
         getAllAccount();
-        System.out.println("Choose account for your " + transType);
-        int acctChoose = keyboard.nextInt();
-        tempAcct = tempCust.getAcctList().get(acctChoose - 1);
-
-        System.out.println("Amount of your " + transType);
-        double amount = keyboard.nextDouble();
-        if (transType == TransactionType.DEPOSIT) {
-            tempAcct.deposit(amount);
-        } else if (transType == TransactionType.WITHDRAWAL) {
-            tempAcct.withdraw(amount);
-
-        }
+        
+        if (transType == TransactionType.DEPOSIT) 
+	{
+		System.out.println("Choose account for your " + transType);
+		acctChoose = keyboard.nextInt();
+		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
+		System.out.println("Amount of your " + transType);
+		amount = keyboard.nextDouble();
+		tempAcct.deposit(amount);
+	} 
+	else if (transType == TransactionType.WITHDRAWAL) 
+	{
+		System.out.println("Choose account for your " + transType);
+		acctChoose = keyboard.nextInt();
+		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
+		System.out.println("Amount of your " + transType);
+		amount = keyboard.nextDouble();
+		tempAcct.withdraw(amount);
+	} 
+	else if (transType == TransactionType.TRANSFER) 
+	{
+		System.out.println("Choose a source account for your " + transType);
+		acctChoose = keyboard.nextInt();
+		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
+		System.out.println("Amount of your " + transType);
+		amount = keyboard.nextDouble();
+		tempAcct.withdraw(amount);
+		System.out.println("Choose a destination account for your " + transType);
+		acctChoose = keyboard.nextInt();
+		tempAcct = tempCust.getAcctList().get(acctChoose - 1);
+		tempAcct.deposit(amount);
+	}
 
         System.out.println("Transaction successful");
 

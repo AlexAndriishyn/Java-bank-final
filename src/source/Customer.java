@@ -59,20 +59,6 @@ public class Customer
 	 * @param amount
 	 * @return 
 	 */
-	public boolean transfer(Account source, Account destination, double amount)
-	{
-		if(source.getFreeTransactionCount() <= source.getTransactionCount() && source.getFreeTransactionCount() != -1)
-		{
-			source.setTransactionFeeOwed();
-			source.withdraw(amount);
-			return destination.deposit(amount);
-		}
-		else
-		{
-			source.withdraw(amount);
-			return destination.deposit(amount);
-		}	
-	}
 	
 	public void calculateAllOwed()
 	{
