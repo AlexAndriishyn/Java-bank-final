@@ -77,8 +77,14 @@ public class CreditAccount extends Account
 	{
 		return this.getCreditOwing() + this.getTransactionFeeOwed() + this.getMonthlyFee();
 	}
-	// MUTATORS
 	
+	@Override
+	public double getTotalBalance()
+	{
+		return 0.0;
+	}
+	// MUTATORS
+
 	/**
 	 * This method determines the minimum amount of money that has to be payed monthly
 	 */

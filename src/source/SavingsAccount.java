@@ -3,7 +3,7 @@ package source;
 public class SavingsAccount extends Account
        {
 	private final static int ACCT_TYPE = 2;
-	private final static double INTEREST_RATE = 0.04; // Interest rate of 4.0% for every type of customer holding this account
+	private final static double INTEREST_RATE = 1.04; // Interest rate of 4.0% for every type of customer holding this account
 	private final static double MAX_WITHDRAWAL = 1000.00;
 
 	public SavingsAccount (double acctBalance, double monthlyFee, int freeTransactionCount, double transactionFee)
@@ -39,6 +39,12 @@ public class SavingsAccount extends Account
 	public double getTotalOwed()
 	{
 		return this.getTransactionFeeOwed() + this.getMonthlyFee(); 
+	}
+	
+	@Override
+	public double getTotalBalance()
+	{
+		return this.getAcctBalance() * this.getInterestRate();
 	}
 	
 	@Override

@@ -4,7 +4,7 @@ public class ChequingAccount extends Account
 {
 	private final static int ACCT_TYPE = 1;
 	private double overdraftLimit;
-	private final static double INTEREST_RATE = 0.015; // Interest rate of 1.5% for every type of customer holding this account
+	private final static double INTEREST_RATE = 1.015; // Interest rate of 1.5% for every type of customer holding this account
 	private final static double OVERDRAFT_INTEREST_RATE = 0.1295; // Overdraft interest rate of 12.95% for every type of customer holding this account
 	
 	public ChequingAccount(double acctBalance, double maxWithdrawal, double monthlyFee, int freeTransactionCount, double transactionFee, double overdraftLimit)
@@ -52,6 +52,11 @@ public class ChequingAccount extends Account
 		return this.getTransactionFeeOwed() + this.getMonthlyFee(); 
 	}
 	
+	@Override
+	public double getTotalBalance()
+	{
+		return this.getAcctBalance() * this.getInterestRate();
+	}
 	// ACCESSORS
 	public double getOverdraftLimit()
 	{

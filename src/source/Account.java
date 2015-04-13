@@ -211,7 +211,8 @@ public abstract class Account
 		return this.interestRate;
 	}
 	
-	public abstract double getTotalOwed();
+	public abstract double getTotalOwed(); // this method will calculate all monthly fees, credit interest and transaction fees for every account
+	public abstract double getTotalBalance(); // this method will calculate the total amount of money we have on balance for every account + our interest rate on those accounts
 
 	@Override
 	public String toString()

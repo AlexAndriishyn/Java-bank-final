@@ -13,7 +13,8 @@ public class Customer
 	private static Account acct_temp; // Account class wrapper
 	private ArrayList<Account> acctList; // Collection for holding account records
 	private int acctCount = 0; // This variable to hold the number of accounts our customer has (could be acctList.length as well, but I think its better this way)
-	private double totalOwed = 0; // This variable holds the total amount of money owed on all accounts (monthly fees, transaction fees, credit interest)
+	private double totalOwed = 0.0; // This variable holds the total amount of money owed on all accounts (monthly fees, transaction fees, credit interest)
+	private double totalBalance = 0.0; // This variable holds the balance * interest rate from all of our accounts as a total
 
 	/**
 	 * Constructor
@@ -70,9 +71,13 @@ public class Customer
 		return totalOwed;
 	}
 	
-	public void calculateAllBenefit()
+	public double getTotalBalance()
 	{
-		
+		for (Account acct : acctList)
+		{
+			totalBalance += acct.getTotalBalance();
+		}
+		return totalBalance;
 	}
 	
 	// MUTATORS

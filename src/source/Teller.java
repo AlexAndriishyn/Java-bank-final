@@ -110,16 +110,16 @@ private static Account destination;
             if (accChosen == 1) {
 
                 tempAcctType = AccountType.CHEQUING;
-                tempAcct = new ChequingAccount(5000, 1000, 8, -1, 0, 500);
+                tempAcct = new ChequingAccount(5000, 2000, 7.99, 25, 0.15, 500);
 
             } else if (accChosen == 2) {
 
                 tempAcctType = AccountType.SAVINGS;
-                tempAcct = new SavingsAccount(5000, 8, -1, 1);
+                tempAcct = new SavingsAccount(5000, 4.99, 10, 0.25);
             } else if (accChosen == 3) {
 
                 tempAcctType = AccountType.CREDIT;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new CreditAccount(5000, 1000, 7, -1, 0, 1.1495);
             } else {
                 System.out.println("Invalid account");
                 mainMenu();
@@ -128,11 +128,11 @@ private static Account destination;
             if (accChosen == 1) {
 
                 tempAcctType = AccountType.SAVINGS;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new SavingsAccount(5000, 0.0, -1, 0.0);
             } else if (accChosen == 2) {
 
                 tempAcctType = AccountType.CREDIT;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new CreditAccount(1000, 200, 5, -1, 0, 1.1495);
             } else {
                 System.out.println("Invalid account");
                 mainMenu();
@@ -140,16 +140,16 @@ private static Account destination;
         } else if (custType == CustomerType.SENIOR) {
             if (accChosen == 1) {
                 tempAcctType = AccountType.CHEQUING;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new ChequingAccount(5000, 2000, 0.0, -1, 0.0, 500);
 
             } else if (accChosen == 2) {
 
                 tempAcctType = AccountType.SAVINGS;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new SavingsAccount(5000, 0.0, -1, 0.0);
             } else if (accChosen == 3) {
 
                 tempAcctType = AccountType.CREDIT;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new CreditAccount(3000, 500, 5, -1, 0, 1.0995);
             } else {
                 System.out.println("Invalid account");
                 mainMenu();
@@ -158,11 +158,11 @@ private static Account destination;
             if (accChosen == 1) {
 
                 tempAcctType = AccountType.CHEQUING;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new ChequingAccount(5000, 10000, 14.99, -1, 0.0, 500);
             } else if (accChosen == 2) {
 
                 tempAcctType = AccountType.CREDIT;
-                tempAcct = new CreditAccount(5000, 1000, 8, -1, 0, 1.1495);
+                tempAcct = new CreditAccount(10000, 3000, 15, -1, 0, 1.1995);
             } else if (accChosen == 3) {
 
                 tempAcctType = AccountType.BUSINESS;
@@ -276,6 +276,7 @@ private static Account destination;
             System.out.println(tempAccount);
 	}
 	System.out.printf("Total owed: %.2f%n", tempCust.getTotalOwed());
+	System.out.printf("Total balance: %.2f%n", tempCust.getTotalBalance());
     }
 
     private void chooseAccount(TransactionType transType) {
@@ -319,9 +320,7 @@ private static Account destination;
 	}
 
         System.out.println("Transaction successful");
-
         manageCustomer();
-
     }
 
     private void editInformation() {
