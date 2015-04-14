@@ -223,7 +223,7 @@ private static Account destination;
         // cust.displayAccountInfo();
         System.out.println("Input a command");
         System.out.println("0. Back to main");
-        System.out.println("1. View balance");
+        System.out.println("1. View balance, monthly fees and interest gained");
         System.out.println("2. Deposit into an account");
         System.out.println("3. Withdraw from an account");
 	System.out.println("4. Transfer money");

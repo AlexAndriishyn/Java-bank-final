@@ -1,18 +1,25 @@
 package source;
 
 public class BusinessAccount extends Account {
-    
-    private double busAcctBalance;
-    private final double MAX_WITHDRAWAL = 50000.00;
-    private double overdraftLimit = 10000;
-    private double MONTHLY_FEE = 25.0;
-    private final double interestRate;
-    private double depositAmount;
-    
-	public BusinessAccount()
+
+	private final static int ACCT_TYPE = 4;
+	private double busAcctBalance;
+	private final static double MAX_WITHDRAWAL = 50000.00;
+	private double overdraftLimit = 10000;
+	private final static double MONTHLY_FEE = 25.0;
+	private final double interestRate;
+
+	public BusinessAccount(double acctBalance, int freeTransactionCount, double transactionFee)
 	{
-            
-            
+		super(ACCT_TYPE, acctBalance, MAX_WITHDRAWAL, MONTHLY_FEE, freeTransactionCount, transactionFee);
+	}
+}    
+
+
+
+/*
+public BusinessAccount()
+	{
 		double transactionFee = 0.00;//initializing to zero
                 int transactionCount = 0;
                 
@@ -50,12 +57,4 @@ public class BusinessAccount extends Account {
                 
                 if (depositAmount >= 100000)
                     MONTHLY_FEE = 0.00;
-	}       
-}
-    
-
-            
-    
-}
-
-
+*/

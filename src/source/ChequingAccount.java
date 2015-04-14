@@ -72,6 +72,6 @@ public class ChequingAccount extends Account
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format("Transaction fee owed: %5.2f | Overdraft limit: %7.2f | Interest rate: %7.3f | Overdraft interest rate: %7.4f", this.getTransactionFeeOwed(), this.overdraftLimit, this.getInterestRate(), OVERDRAFT_INTEREST_RATE/100);
+		return super.toString() + String.format("Transaction fee owed: %5.2f | Overdraft limit: %7.2f | Interest rate: %7.4f | Overdraft interest rate: %7.4f", this.getTransactionFeeOwed(), this.overdraftLimit, this.getInterestRate() - 1, OVERDRAFT_INTEREST_RATE - 1);
 	}
 }

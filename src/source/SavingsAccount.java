@@ -50,6 +50,6 @@ public class SavingsAccount extends Account
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format("Transaction fee owed: %3.2f | Interest rate: %3.3s", this.getTransactionFeeOwed(), this.getInterestRate());
+		return super.toString() + String.format("Transaction fee owed: %3.2f | Interest rate: %3.3s", this.getTransactionFeeOwed(), this.getInterestRate() - 1);
 	}
 }
